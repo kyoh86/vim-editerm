@@ -1,0 +1,18 @@
+#!/bin/sh
+
+tmpfile=`mktemp`
+
+echo "\033]51;[\"call\", \"Tapi_EditermEditFile\", [\"${tmpfile}\", \"$1\"]]\007"
+
+if which inotifywait >/dev/null; then
+  inotifywait -e delete_self ${tmpfile}
+elif which fswatch >/dev/null; then
+  fswatch --event 8 -1 -0 --format '' ${tmpfile}
+else
+  while true; do
+    if [[ ! -f ${tmpfile} ]]; then
+      break
+    fi
+    sleep 1
+  done
+fi
