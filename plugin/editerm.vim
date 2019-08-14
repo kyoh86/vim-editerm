@@ -11,7 +11,7 @@ set cpo&vim
 
 let s:remotes={}
 function! s:leave_remote()
-  " unloaded/quit buffer number
+  " unloading buffer number
   let l:bufnum = expand('<abuf>')+0    
   " lockfile for the buffer
   let l:locker = get(s:remotes, l:bufnum, '')
@@ -26,6 +26,7 @@ endfunction
 
 function! s:open_buffer(filename)
   execute('new '.a:filename)
+  setlocal bufhidden=wipe
   return bufnr('%')
 endfunction
 
@@ -40,7 +41,6 @@ function! Tapi_EditermEditFile(bufnum, arglist)
     augroup EDITERM
       autocmd! * <buffer>
       autocmd BufUnload <buffer> :call <SID>leave_remote()
-      autocmd QuitPre <buffer> :call <SID>leave_remote()
     augroup END
   endif
 endfunction
