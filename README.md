@@ -19,10 +19,8 @@ Plug 'kyoh86/vim-editerm'
 Put below lines in `.zshrc` or `.bashrc`.
 
 ```
-if [[ -n "${VIM_TERMINAL}" ]]; then
-  function vim() {
-    ${EDITOR} "$@"
-  }
+if [[ "${VIM_EDITERM_SETUP}" != "" ]]; then
+  source "${VIM_EDITERM_SETUP}" 
 fi
 ```
 
@@ -31,4 +29,5 @@ fi
 Without being conscious.
 
 In `:terminal`, you can `git commit` in buffer in the parent vim.
+
 If you want to stop editing with the error (i.e. to stop to commit), call `:Cq` or `:CQ`.

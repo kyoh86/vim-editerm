@@ -19,6 +19,7 @@ function! Tapi_EditermEditFile(bufnum, arglist)
 endfunction
 
 let $EDITOR=expand('<sfile>:p:h') . '/tvim'
+let $VIM_EDITERM_SETUP=expand('<sfile>:p:h') . '/setup.sh'
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
