@@ -33,12 +33,16 @@ function! s:release_remote(bufnum, ret)
   endif
 endfunction
 
-function! s:open_buffer(filename)
-  execute('new '.a:filename)
+function! s:open_remote(lockfile, filename)
+  execute('new ' .. a:filename)
+  let s:remotes[bufnr('%')] = a:lockfile
   setlocal bufhidden=wipe
   command -buffer Cq :call <SID>kill_remote()
   command -buffer CQ :call <SID>kill_remote()
-  return bufnr('%')
+  augroup EDITERM
+    autocmd! * <buffer>
+    autocmd BufUnload <buffer> :call <SID>leave_remote()
+  augroup END
 endfunction
 
 " Function: Tapi_EditermEditFile
@@ -46,13 +50,7 @@ endfunction
 " [(lock file), (editing file)] as $EDITOR.
 function! Tapi_EditermEditFile(bufnum, arglist)
   if len(a:arglist) == 2
-    let l:locker = a:arglist[0]
-    let l:bufnum = s:open_buffer(a:arglist[1])
-    let s:remotes[l:bufnum] = l:locker
-    augroup EDITERM
-      autocmd! * <buffer>
-      autocmd BufUnload <buffer> :call <SID>leave_remote()
-    augroup END
+    call s:open_remote(a:arglist[0], a:arglist[1])
   endif
 endfunction
 
