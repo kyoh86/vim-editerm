@@ -21,7 +21,7 @@ Put below lines in `.zshrc` or `.bashrc`.
 ```
 if [[ -n "${VIM_TERMINAL}" ]]; then
   function vim() {
-    $EDITOR $@
+    ${EDITOR} "$@"
   }
 fi
 ```
