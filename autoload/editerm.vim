@@ -1,6 +1,8 @@
 " editerm.vim - 
 " Maintainer:   kyoh86
 
+scriptversion 3
+
 if exists('g:autoloaded_editerm')
   finish
 endif
@@ -11,10 +13,10 @@ set cpo&vim
 
 let s:remotes={}
 
-function! s:kill_remote()
+function! s:kill_remote(bang)
   let l:bufnr = bufnr('%')
   call s:release_remote(l:bufnr, '1')
-  execute(l:bufnr .. 'bwipeout!')
+  execute(l:bufnr .. 'bwipeout' .. a:bang)
 endfunction
 
 function! s:leave_remote()
@@ -37,8 +39,8 @@ function! editerm#open(lockfile, filename)
   execute('new ' .. a:filename)
   let s:remotes[bufnr('%')] = a:lockfile
   setlocal bufhidden=wipe
-  command -buffer Cq :call <SID>kill_remote()
-  command -buffer CQ :call <SID>kill_remote()
+  command -buffer -bang Cq :call <SID>kill_remote('<bang>')
+  command -buffer -bang CQ :call <SID>kill_remote('<bang>')
   augroup EDITERM
     autocmd! * <buffer>
     autocmd BufUnload <buffer> :call <SID>leave_remote()
