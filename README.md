@@ -28,7 +28,7 @@ fi
 
 ## USAGE
 
-Bithout being conscious.
+Without being conscious.
 
 In `:terminal`, you can `git commit` in buffer in the parent vim.
 If you want to stop editing with the error (i.e. to stop to commit), call `:Cq` or `:CQ`.
