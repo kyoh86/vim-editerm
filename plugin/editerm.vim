@@ -10,23 +10,34 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 let s:remotes={}
+
+function! s:kill_remote()
+  let l:bufnr = bufnr('%')
+  call s:release_remote(l:bufnr, '1')
+  execute(l:bufnr .. 'bwipeout!')
+endfunction
+
 function! s:leave_remote()
-  " unloading buffer number
-  let l:bufnum = expand('<abuf>')+0    
+  call s:release_remote(expand('<abuf>')+0, '0')
+endfunction
+
+function! s:release_remote(bufnum, ret)
   " lockfile for the buffer
-  let l:locker = get(s:remotes, l:bufnum, '')
+  let l:locker = get(s:remotes, a:bufnum, '')
 
   if l:locker != ''
     " delete lockfile
-    call delete(l:locker)
+    call writefile([a:ret], l:locker)
 
-    unlet s:remotes[l:bufnum]
+    unlet s:remotes[a:bufnum]
   endif
 endfunction
 
 function! s:open_buffer(filename)
   execute('new '.a:filename)
   setlocal bufhidden=wipe
+  command -buffer Cq :call <SID>kill_remote()
+  command -buffer CQ :call <SID>kill_remote()
   return bufnr('%')
 endfunction
 
