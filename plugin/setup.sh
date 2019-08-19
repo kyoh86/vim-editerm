@@ -1,3 +1,7 @@
+# setup.sh
+# Maintainer:	kyoh86
+# License:		MIT License(http://www.opensource.org/licenses/MIT)
+
 if [[ -n "${VIM_TERMINAL}" ]]; then
   function vim() {
     ${EDITOR} "$@"

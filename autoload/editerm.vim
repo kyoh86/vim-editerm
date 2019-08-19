@@ -1,5 +1,6 @@
-" editerm.vim - 
-" Maintainer:   kyoh86
+" editerm.vim -
+" Maintainer:	kyoh86
+" License:		MIT License(http://www.opensource.org/licenses/MIT)
 
 scriptversion 3
 

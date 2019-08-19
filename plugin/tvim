@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# tvim
+# Maintainer:	kyoh86
+# License:		MIT License(http://www.opensource.org/licenses/MIT)
+
 tmpfile=`mktemp`
 
 echo "\033]51;[\"call\", \"Tapi_EditermEditFile\", [\"${VIM_EDITERM_OPENER}\", \"${tmpfile}\", \"$1\"]]\007"

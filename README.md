@@ -75,3 +75,9 @@ And if you want to change prefix of them:
 ```vim
 let g:editerm_defdrop_prefix = 'vim_'  " default: ':'
 ```
+
+# LICENSE
+
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg)](http://www.opensource.org/licenses/MIT)
+
+This software is released under the [MIT License](http://www.opensource.org/licenses/MIT), see LICENSE.
