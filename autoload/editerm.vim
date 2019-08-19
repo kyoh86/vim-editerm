@@ -35,8 +35,20 @@ function! s:release_remote(bufnum, ret)
   endif
 endfunction
 
-function! editerm#open(lockfile, filename)
-  execute('new ' .. a:filename)
+function! editerm#open(command, lockfile, filename)
+  let l:command = get({
+    \ 'n': 'new',
+    \ 'e': 'edit',
+    \ 'v': 'vnew',
+    \ 't': 'tab'
+    \ }, a:command, '')
+  if l:command == ''
+    echoerr 'invalid command: ' .. a:command
+    return
+  endif
+
+  execute(l:command .. ' ' .. a:filename)
+
   let s:remotes[bufnr('%')] = a:lockfile
   setlocal bufhidden=wipe
   command -buffer -bang Cq :call <SID>kill_remote('<bang>')

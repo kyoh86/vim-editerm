@@ -2,7 +2,7 @@
 
 tmpfile=`mktemp`
 
-echo "\033]51;[\"call\", \"Tapi_EditermEditFile\", [\"${tmpfile}\", \"$1\"]]\007"
+echo "\033]51;[\"call\", \"Tapi_EditermEditFile\", [\"${VIM_EDITERM_OPENER}\", \"${tmpfile}\", \"$1\"]]\007"
 
 if which inotifywait >/dev/null; then
   inotifywait "${tmpfile}"
