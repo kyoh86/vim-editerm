@@ -13,17 +13,17 @@ set cpo&vim
 
 let s:remotes={}
 
-function! s:kill_remote(bang)
+function! editerm#kill_remote(bang)
   let l:bufnr = bufnr('%')
-  call s:release_remote(l:bufnr, '1')
+  call editerm#release_remote(l:bufnr, '1')
   execute(l:bufnr .. 'bwipeout' .. a:bang)
 endfunction
 
-function! s:leave_remote()
-  call s:release_remote(expand('<abuf>')+0, '0')
+function! editerm#leave_remote()
+  call editerm#release_remote(expand('<abuf>')+0, '0')
 endfunction
 
-function! s:release_remote(bufnum, ret)
+function! editerm#release_remote(bufnum, ret)
   if !has_key(s:remotes, a:bufnum)
     return
   endif
@@ -54,11 +54,11 @@ function! editerm#open(command, lockfile, filename)
   if a:lockfile != ''
     let s:remotes[bufnr('%')] = a:lockfile
     setlocal bufhidden=wipe
-    command -buffer -bang Cq :call <SID>kill_remote('<bang>')
-    command -buffer -bang CQ :call <SID>kill_remote('<bang>')
+    command -buffer -bang Cq :call editerm#kill_remote('<bang>')
+    command -buffer -bang CQ :call editerm#kill_remote('<bang>')
     augroup EDITERM
       autocmd! * <buffer>
-      autocmd BufUnload <buffer> :call <SID>leave_remote()
+      autocmd BufUnload <buffer> :call editerm#leave_remote()
     augroup END
   endif
 endfunction
