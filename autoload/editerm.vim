@@ -17,7 +17,7 @@ let s:remotes={}
 function! editerm#kill_remote(bang)
   let l:bufnr = bufnr('%')
   call editerm#release_remote(l:bufnr, '1')
-  execute(l:bufnr .. 'bwipeout' .. a:bang)
+  execute(l:bufnr .. get(g:, 'editerm_killer', 'bwipeout') .. a:bang)
 endfunction
 
 function! editerm#leave_remote()
