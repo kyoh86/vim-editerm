@@ -54,7 +54,7 @@ export VIM_EDITERM_OPENER="t"  # :tabnew <file>
 
 ### Definition of the dropping commands
 
-`vim-editerm` will creates below commands which drops files to vim.
+`vim-editerm` will create below commands which drop files to vim.
 
 ```shell
 :drop <files...>

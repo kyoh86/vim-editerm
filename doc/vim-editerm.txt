@@ -1,0 +1,126 @@
+*vim-editerm* Plugin sets $EDITOR using parent vim in :terminal
+
+==============================================================================
+CONTENTS                                                *vim-editerm-contents*
+
+- Introduction                                |vim-editerm-introduction|
+- Install                                     |vim-editerm-install|
+- Commands                                    |vim-editerm-commands|
+  - Cq                                          |:Cq| |:CQ|
+- Shell Functions                             |vim-editerm-shell-functions|
+- Options                                     |vim-editerm-options|
+  - g:editerm_opener                            |g:editerm_opener|
+  - g:editerm_defdrop                           |g:editerm_defdrop|
+  - g:editerm_defdrop_prefix                    |g:editerm_defdrop_prefix|
+- License                                     |vim-editerm-license|
+
+==============================================================================
+INTRODUCTION                                        *vim-editerm-introduction*
+
+Plugin sets `$EDITOR` using parent vim in |:terminal|.
+
+If we use commands which call `$EDITOR`, like a `git commit`, vim-editerm will
+open new buffer in parent vim.
+
+==============================================================================
+INSTALL                                                  *vim-editerm-install*
+
+Below is a sample using vim-plug >
+    Plug 'kyoh86/vim-editerm'
+<
+
+And put below lines in `.zshrc` or `.bashrc` in |:terminal|. >
+    if [[ "${VIM_EDITERM_SETUP}" != "" ]]; then
+      source "${VIM_EDITERM_SETUP}"
+    fi
+<
+==============================================================================
+COMMANDS                                                *vim-editerm-commands*
+
+Cq                                                                 *:Cq* *:CQ*
+
+    This commands will be respond error to commands calling `$EDITOR`.
+
+    e.g. To stop committing by `git commit`.
+
+==============================================================================
+SHELL FUNCTIONS                                  *vim-editerm-shell-functions*
+
+    `vim-editerm` will create below commands which drop files to vim.
+    >
+    :drop <files...>
+    :edit <files...>
+    :new <files...>
+    :vnew <files...>
+    :tabnew <files...>
+<
+==============================================================================
+OPTIONS                                                  *vim-editerm-options*
+
+g:editerm_opener                                            *g:editerm_opener*
+    Type: |String|
+    Default: `'n'`
+
+    Change behavior to open new buffer.
+
+    Options:
+        `'e'`: open new buffer in current window.
+        `'n'`: split window horizontally.
+        `'v'`: split window vertically.
+        `'t'`: open new tab.
+
+    Example: >
+        let g:editerm_opener = 't'  " open new tab
+<
+    This option can be overwritten by the shell variable `VIM_EDITERM_OPENER`.
+
+    Example: >
+        export VIM_EDITERM_OPENER="v"  # split window vertically
+<
+g:editerm_defdrop                                          *g:editerm_defdrop*
+    Type: |String|
+    Default: `'1'`
+
+    `vim-editerm` will create below commands which drop files to vim.
+    >
+    :drop <files...>
+    :edit <files...>
+    :new <files...>
+    :vnew <files...>
+    :tabnew <files...>
+<
+    (See also: |vim-editerm-shell-functions|)
+
+    To suppress them, you can set `g:editerm_defdrop` to `0`.
+
+    Example: >
+        let g:editerm_defdrop = '0'
+
+g:editerm_defdrop_prefix                            *g:editerm_defdrop_prefix*
+    Type: |String|
+    Default: `':'`
+
+    `vim-editerm` will create below commands which drop files to vim.
+    >
+    :drop <files...>
+    :edit <files...>
+    :new <files...>
+    :vnew <files...>
+    :tabnew <files...>
+<
+    (See also: |vim-editerm-shell-functions|)
+
+    To change their prefix (`:`), you can set `g:editerm_defdrop_prefix`.
+
+    Example: >
+        let g:editerm_defdrop_prefix = 'vim_'
+        # This will create commands like "vim_drop", "vim_edit" and so on.
+<
+==============================================================================
+LICENSE                                                  *vim-editerm-license*
+
+MIT License.
+
+Also see http://www.opensource.org/licenses/MIT for more information.
+
+vim:textwidth=78:tabstop=4:shiftwidth=4:expandtab:filetype=help:norl:
