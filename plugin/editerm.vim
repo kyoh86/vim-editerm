@@ -20,14 +20,14 @@ function! Tapi_EditermEditFile(bufnum, arglist)
   endif
 endfunction
 
-let s:dir=expand('<sfile>:p:h')
-let $EDITOR=s:dir .. '/tvim'
-let $VIM_EDITERM_SETUP=s:dir .. '/setup.sh'
-let $VIM_EDITERM_DROP=s:dir .. '/tdrop'
+let s:dir = expand('<sfile>:p:h')
+let $EDITOR = s:dir .. '/tvim'
+let $VIM_EDITERM_SETUP = s:dir .. '/setup.sh'
+let $VIM_EDITERM_DROP = s:dir .. '/tdrop'
 
-let $VIM_EDITERM_OPENER=get(g:, 'editerm_opener', 'n')
-let $VIM_EDITERM_DEFDROP=get(g:, 'editerm_defdrop', '1')
-let $VIM_EDITERM_DEFDROP_PREFIX=get(g:, 'editerm_defdrop_prefix', ':')
+let $VIM_EDITERM_OPENER = get(g:, 'editerm_opener', 'n')
+let $VIM_EDITERM_DEFDROP = get(g:, 'editerm_defdrop', '1')
+let $VIM_EDITERM_DEFDROP_PREFIX = get(g:, 'editerm_defdrop_prefix', ':')
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
