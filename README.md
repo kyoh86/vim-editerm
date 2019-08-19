@@ -18,7 +18,7 @@ And put below lines in `.zshrc` or `.bashrc`.
 
 ```
 if [[ "${VIM_EDITERM_SETUP}" != "" ]]; then
-  source "${VIM_EDITERM_SETUP}" 
+  source "${VIM_EDITERM_SETUP}"
 fi
 ```
 
@@ -40,7 +40,7 @@ We can change behavior to open files.
 let g:editerm_opener = 'n'  " :new <file> (default)
 let g:editerm_opener = 'e'  " :edit <file>
 let g:editerm_opener = 'v'  " :vnew <file>
-let g:editerm_opener = 't'  " :tab <file>
+let g:editerm_opener = 't'  " :tabnew <file>
 ```
 
 Or by `.zshrc` or `.bashrc`
@@ -49,5 +49,29 @@ Or by `.zshrc` or `.bashrc`
 export VIM_EDITERM_OPENER="n"  # :new <file>
 export VIM_EDITERM_OPENER="e"  # :edit <file>
 export VIM_EDITERM_OPENER="v"  # :vnew <file>
-export VIM_EDITERM_OPENER="t"  # :tab <file>
+export VIM_EDITERM_OPENER="t"  # :tabnew <file>
+```
+
+### Definition of the dropping commands
+
+`vim-editerm` will creates below commands which drops files to vim.
+
+```shell
+:drop <files...>
+:edit <files...>
+:new <files...>
+:vnew <files...>
+:tabnew <files...>
+```
+
+If you want to supress them:
+
+```vim
+let g:editerm_defdrop = '0'  " default: '1'
+```
+
+And if you want to change prefix of them:
+
+```vim
+let g:editerm_defdrop_prefix = 'vim_'  " default: ':'
 ```
