@@ -4,32 +4,46 @@
 # Maintainer:	kyoh86
 # License:		MIT License(http://www.opensource.org/licenses/MIT)
 
-tmpfile=$(mktemp)
+exit_code=0
+for file; do
+  tmpfile=$(mktemp)
 
-echo "\033]51;[\"call\", \"Tapi_EditermEditFile\", [\"${VIM_EDITERM_OPENER}\", \"${tmpfile}\", \"$1\"]]\007"
+  if [ "${file}" = "--" ]; then
+    continue
+  fi
 
-if command -v inotifywait >/dev/null; then
-  inotifywait "${tmpfile}"
-elif command -v fswatch >/dev/null; then
-  fswatch -1 -0 --format '' "${tmpfile}"
-else
-  while true; do
-    if [ ! -f "${tmpfile}" ]; then
+  echo "\033]51;[\"call\", \"Tapi_EditermEditFile\", [\"${VIM_EDITERM_OPENER}\", \"${tmpfile}\", \"$file\"]]\007"
+
+  if command -v inotifywait >/dev/null; then
+    inotifywait "${tmpfile}"
+  elif command -v fswatch >/dev/null; then
+    fswatch -1 -0 --format '' "${tmpfile}"
+  else
+    while true; do
+      if [ ! -f "${tmpfile}" ]; then
+        break
+      fi
+      if [ -n "${tmpfile}" ]; then
+        break
+      fi
+      sleep 1
+    done
+  fi
+
+  if [ -n "${tmpfile}" ]; then
+    while read -r line; do
+      if [ "${line}" = "" ]; then
+        continue
+      fi
+      exit_code=$((line))
       break
-    fi
-    if [ -n "${tmpfile}" ]; then
-      break
-    fi
-    sleep 1
-  done
-fi
+    done < "${tmpfile}"
+  fi
+  rm "${tmpfile}"
 
-if [ -n "${tmpfile}" ]; then
-  while read -r line; do
-    if [ "${line}" = "" ]; then
-      continue
-    fi
-    exit $((line))
-  done < "${tmpfile}"
-fi
-rm "${tmpfile}"
+  if [ ${exit_code} != 0 ]; then
+    break
+  fi
+done
+
+exit $exit_code

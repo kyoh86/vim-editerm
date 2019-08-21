@@ -6,7 +6,22 @@
 
 if [ -n "${VIM_TERMINAL}" ]; then
   vim() {
-    ${EDITOR} "$@"
+    has_option=0
+    for x; do
+      case $x in
+        -- )
+          :
+          ;;
+        -* )
+          has_option=1
+          ;;
+      esac
+    done
+    if [ $has_option = 1 ] ; then
+      command vim "$@"
+    else
+      ${EDITOR} "$@"
+    fi
   }
   if [ "${VIM_EDITERM_DEFDROP}" = "1" ]; then
     eval "function ${VIM_EDITERM_DEFDROP_PREFIX}drop()"' { ${VIM_EDITERM_DROP} "$@"; }'

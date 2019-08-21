@@ -4,4 +4,6 @@
 # Maintainer:	kyoh86
 # License:		MIT License(http://www.opensource.org/licenses/MIT)
 
-echo "\033]51;[\"call\", \"Tapi_EditermEditFile\", [\"${VIM_EDITERM_OPENER}\", \"\", \"$1\"]]\007"
+for file; do
+  echo "\033]51;[\"call\", \"Tapi_EditermEditFile\", [\"${VIM_EDITERM_OPENER}\", \"\", \"$file\"]]\007"
+done
