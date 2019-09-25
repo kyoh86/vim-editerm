@@ -5,5 +5,5 @@
 # License:		MIT License(http://www.opensource.org/licenses/MIT)
 
 for file; do
-  echo "\033]51;[\"call\", \"Tapi_EditermEditFile\", [\"${VIM_EDITERM_OPENER}\", \"\", \"$file\"]]\007"
+  echo -e "\033]51;[\"call\", \"Tapi_EditermEditFile\", [\"${VIM_EDITERM_OPENER}\", \"\", \"$file\"]]\007"
 done
