@@ -14,7 +14,7 @@ With vim-plug:
 Plug 'kyoh86/vim-editerm'
 ```
 
-And put below lines in `.zshrc` or `.bashrc`.
+And if you want to use `vim` and `:edit|new|vnew|tabnew` in shell, put below lines in `.zshrc` or `.bashrc`.
 
 ```
 if [[ "${VIM_EDITERM_SETUP}" != "" ]]; then
