@@ -12,6 +12,14 @@ for file; do
     continue
   fi
 
+  if [ -z "${file}" ]; then
+    continue
+  fi
+
+  if [ "${file:0:1}" != "/" ]; then
+    file="${PWD%/}/${file}"
+  fi
+
   echo -e "\033]51;[\"call\", \"Tapi_EditermEditFile\", [\"${VIM_EDITERM_OPENER}\", \"${tmpfile}\", \"$file\"]]\007"
 
   if command -v inotifywait >/dev/null; then
