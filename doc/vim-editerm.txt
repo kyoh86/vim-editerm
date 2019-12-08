@@ -17,10 +17,13 @@ CONTENTS                                                *vim-editerm-contents*
 ==============================================================================
 INTRODUCTION                                        *vim-editerm-introduction*
 
-Plugin sets `$EDITOR` using parent vim in |:terminal|.
+Usually, calling `git commit`, `vim` and suchlike commands in |:terminal|,  
+new vim process starts in their.
+But it makes some unfavorable situation depending on the settings.
 
-If we use commands which call `$EDITOR`, like a `git commit`, vim-editerm will
-open new buffer in parent vim.
+This plugin, *vim-editerm* will set an environment varialble `$EDITOR` and
+override `vim` command with function that drops files in new buffer in parent
+vim.
 
 ==============================================================================
 INSTALL                                                  *vim-editerm-install*
@@ -28,8 +31,9 @@ INSTALL                                                  *vim-editerm-install*
 Below is a sample using vim-plug >
     Plug 'kyoh86/vim-editerm'
 <
-
-And put below lines in `.zshrc` or `.bashrc` in |:terminal|. >
+                                                      *vim-editerm-shell-init*
+And if you want to override `vim` and create commands `:edit|new|vnew|tabnew`
+in `:terminal`, put below lines in `.zshrc` or `.bashrc`. >
     if [[ "${VIM_EDITERM_SETUP}" != "" ]]; then
       source "${VIM_EDITERM_SETUP}"
     fi
@@ -72,7 +76,7 @@ g:editerm_opener                                            *g:editerm_opener*
     Example: >
         let g:editerm_opener = 't'  " open new tab
 <
-    This option can be overwritten by the shell variable `VIM_EDITERM_OPENER`.
+    This option can be overwritten by the shell variable `$VIM_EDITERM_OPENER`.
 
     Example: >
         export VIM_EDITERM_OPENER="v"  # split window vertically
@@ -81,15 +85,8 @@ g:editerm_defdrop                                          *g:editerm_defdrop*
     Type: |String|
     Default: `'1'`
 
-    `vim-editerm` will create below commands which drop files to vim.
->
-    :drop <files...>
-    :edit <files...>
-    :new <files...>
-    :vnew <files...>
-    :tabnew <files...>
-<
-    (See also: |vim-editerm-shell-functions|)
+    `vim-editerm` will create special commands which drop files to vim.
+    (See: |vim-editerm-shell-functions| )
 
     To suppress them, you can set `g:editerm_defdrop` to `0`.
 
@@ -100,15 +97,8 @@ g:editerm_defdrop_prefix                            *g:editerm_defdrop_prefix*
     Type: |String|
     Default: `':'`
 
-    `vim-editerm` will create below commands which drop files to vim.
->
-    :drop <files...>
-    :edit <files...>
-    :new <files...>
-    :vnew <files...>
-    :tabnew <files...>
-<
-    (See also: |vim-editerm-shell-functions|)
+    `vim-editerm` will create special commands which drop files to vim.
+    (See: |vim-editerm-shell-functions| )
 
     To change their prefix (`:`), you can set `g:editerm_defdrop_prefix`.
 

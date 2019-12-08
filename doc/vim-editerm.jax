@@ -1,0 +1,127 @@
+*vim-editerm* :terminal の中で $EDITOR を外のVimに置き換えるプラグイン
+
+==============================================================================
+目次                                                    *vim-editerm-contents*
+
+- はじめに                                          |vim-editerm-introduction|
+- インストール                                           |vim-editerm-install|
+- コマンド                                              |vim-editerm-commands|
+  - Cq                                                             |:Cq| |:CQ|
+- シェル                                         |vim-editerm-shell-functions|
+- 設定                                                   |vim-editerm-options|
+  - g:editerm_opener                                        |g:editerm_opener|
+  - g:editerm_defdrop                                      |g:editerm_defdrop|
+  - g:editerm_defdrop_prefix                        |g:editerm_defdrop_prefix|
+- LICENSE                                                |vim-editerm-license|
+
+==============================================================================
+はじめに                                            *vim-editerm-introduction*
+
+通常、 |:terminal| の中で `git commit` などのコマンドを使用すると、
+ターミナルの中でさらにVimが起動してしまいます。
+その場合、設定などによっては思わぬ挙動を示すことがあります。
+
+このプラグイン *vim-editerm* は、 |:terminal| の中の環境変数 `$EDITOR` を
+自動で変更し、 `git commit` などのコマンドでVimを新たに起動するのではなく、
+外のVimにファイル編集を受け渡すようにすることができるプラグインです。
+
+==============================================================================
+インストール                                             *vim-editerm-install*
+
+`vim-plug` を使用する場合は以下の通りです。 >
+    Plug 'kyoh86/vim-editerm'
+<
+                                                      *vim-editerm-shell-init*
+`:terminal` の中で `vim` コマンドを上書きしたり、`:edit|new|vnew|tabnew`
+といったコマンドを使えるようにするには、`.zshrc` や `.bashrc`
+に以下を記述してください。 >
+    if [[ "${VIM_EDITERM_SETUP}" != "" ]]; then
+      source "${VIM_EDITERM_SETUP}"
+    fi
+<
+==============================================================================
+コマンド                                                *vim-editerm-commands*
+
+Cq                                                                 *:Cq* *:CQ*
+
+    `$EDITOR` で開始したファイルの編集を、キャンセルします。
+    ファイルに変更が加わっている場合は、 `:CQ!` と |<bang>| をつけて
+    強制的に終了することもできます。
+
+    このコマンドを実行すると、 `$EDITOR` を使用しているコマンドに
+    エラーコードを返すため、 `git commit` などの実行がキャンセルされます。
+
+==============================================================================
+シェル                                           *vim-editerm-shell-functions*
+
+`.zshrc` や `.bashrc` に初期化処理（ |vim-editerm-shell-init| ）を記述した
+場合、次のコマンドを使用できるようになります。 
+
+>
+    :drop <files...>
+    :edit <files...>
+    :new <files...>
+    :vnew <files...>
+    :tabnew <files...>
+<
+`:drop` は |g:editerm_opener| で設定したデフォルトの挙動でファイルを開きます。
+それ以外のコマンドはVimの同名のコマンドと同等です。
+
+==============================================================================
+オプション                                               *vim-editerm-options*
+
+g:editerm_opener                                            *g:editerm_opener*
+    型: |String|
+    デフォルト: `'n'`
+
+    ファイルを開くときの挙動を変更します。
+
+    選択肢:
+        `'e'`: 現在のバッファ（:terminal）で開きます。 `:edit` を使用します。
+        `'n'`: 水平に分割したウィンドウで開きます。 `:new` を使用します。
+        `'v'`: 垂直に分割したウィンドウで開きます。 `:vnew` を使用します。
+        `'t'`: 新しいタブで開きます。 `:tabnew` を使用します。
+
+    例: >
+        let g:editerm_opener = 't'  " 新しいタブで開く
+<
+    これらのオプションは、 |:terminal| 内の環境変数 `$VIM_EDITERM_OPENER` でも
+    設定を変更することができます。
+
+    例: >
+        export VIM_EDITERM_OPENER="v"  # 垂直に分割したウィンドウで開く
+<
+g:editerm_defdrop                                          *g:editerm_defdrop*
+    型: |String|
+    デフォルト: `'1'`
+
+    `vim-editerm` はシェルに、外のVimにファイルを受け渡すための特殊なコマンド
+    （ |vim-editerm-shell-functions| ）を定義します。
+
+    これらを削除したい場合、 `g:editerm_defdrop` を `0` に設定します。
+
+    例: >
+        let g:editerm_defdrop = '0'
+
+g:editerm_defdrop_prefix                            *g:editerm_defdrop_prefix*
+    型: |String|
+    デフォルト: `':'`
+
+    `vim-editerm` はシェルに、外のVimにファイルを受け渡すための特殊なコマンド
+    （ |vim-editerm-shell-functions| ）を定義します。
+
+    これらのコマンドの接頭辞（ `:` ）を変更したい場合、
+    `g:editerm_defdrop_prefix` を変更します。
+
+    例: >
+        let g:editerm_defdrop_prefix = 'vim_'
+        # ":drop" ":edit" などのコマンドを "vim_drop" "vim_edit" に置き換える
+<
+==============================================================================
+LICENSE                                                  *vim-editerm-license*
+
+MIT License.
+
+Also see http://www.opensource.org/licenses/MIT for more information.
+
+vim:textwidth=78:tabstop=4:shiftwidth=4:expandtab:filetype=help:norl:

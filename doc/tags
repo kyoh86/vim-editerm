@@ -4,6 +4,7 @@ g:editerm_defdrop	vim-editerm.txt	/*g:editerm_defdrop*
 g:editerm_defdrop_prefix	vim-editerm.txt	/*g:editerm_defdrop_prefix*
 g:editerm_opener	vim-editerm.txt	/*g:editerm_opener*
 vim-editerm	vim-editerm.txt	/*vim-editerm*
+vim-editerm	vim-editerm.txt	/*vim-editerm*
 vim-editerm-commands	vim-editerm.txt	/*vim-editerm-commands*
 vim-editerm-contents	vim-editerm.txt	/*vim-editerm-contents*
 vim-editerm-install	vim-editerm.txt	/*vim-editerm-install*
@@ -11,3 +12,4 @@ vim-editerm-introduction	vim-editerm.txt	/*vim-editerm-introduction*
 vim-editerm-license	vim-editerm.txt	/*vim-editerm-license*
 vim-editerm-options	vim-editerm.txt	/*vim-editerm-options*
 vim-editerm-shell-functions	vim-editerm.txt	/*vim-editerm-shell-functions*
+vim-editerm-shell-init	vim-editerm.txt	/*vim-editerm-shell-init*

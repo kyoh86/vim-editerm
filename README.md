@@ -2,6 +2,14 @@
 
 A plugin sets `$EDITOR` using vim in `:terminal`.
 
+Usually, calling `git commit`, `vim` and suchlike commands in |:terminal|,  
+new vim process starts in their.
+But it makes some unfavorable situation depending on the settings.
+
+This plugin, *vim-editerm* will set an environment varialble `$EDITOR` and
+override `vim` command with function that drops files in new buffer in parent
+vim.
+
 ## Screenshot
 
 ![](https://user-images.githubusercontent.com/5582459/63220140-76a44400-c1bc-11e9-8555-389aafde8a38.gif)
@@ -14,7 +22,7 @@ With vim-plug:
 Plug 'kyoh86/vim-editerm'
 ```
 
-And if you want to override `vim` and create commands `:edit|new|vnew|tabnew` in shell, put below lines in `.zshrc` or `.bashrc`.
+And if you want to override `vim` and create commands `:edit|new|vnew|tabnew` in `:terminal`, put below lines in `.zshrc` or `.bashrc`.
 
 ```
 if [[ "${VIM_EDITERM_SETUP}" != "" ]]; then
