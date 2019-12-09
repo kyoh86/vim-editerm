@@ -5,7 +5,6 @@ g:editerm_defdrop	vim-editerm.jax	/*g:editerm_defdrop*
 g:editerm_defdrop_prefix	vim-editerm.jax	/*g:editerm_defdrop_prefix*
 g:editerm_opener	vim-editerm.jax	/*g:editerm_opener*
 vim-editerm	vim-editerm.jax	/*vim-editerm*
-vim-editerm	vim-editerm.jax	/*vim-editerm*
 vim-editerm-commands	vim-editerm.jax	/*vim-editerm-commands*
 vim-editerm-contents	vim-editerm.jax	/*vim-editerm-contents*
 vim-editerm-install	vim-editerm.jax	/*vim-editerm-install*
