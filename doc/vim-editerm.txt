@@ -21,7 +21,7 @@ Usually, calling `git commit`, `vim` and suchlike commands in |:terminal|, new
 vim process starts in their.
 But it makes some unfavorable situation depending on the settings.
 
-This plugin, vim-editerm will set an environment varialble `$EDITOR` and
+This plugin, *vim-editerm* will set an environment varialble `$EDITOR` and
 override `vim` command with function that drops files in new buffer in parent
 vim.
 
