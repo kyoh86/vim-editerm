@@ -1,4 +1,4 @@
-*vim-editerm* :terminal の中で $EDITOR を外のVimに置き換えるプラグイン
+*vim-editerm.txt* :terminal の中で $EDITOR を外のVimに置き換えるプラグイン
 
 ==============================================================================
 目次                                                    *vim-editerm-contents*
@@ -17,13 +17,13 @@
 ==============================================================================
 はじめに                                            *vim-editerm-introduction*
 
-通常、 |:terminal| の中で `git commit` などのコマンドを使用すると、
-ターミナルの中でさらにVimが起動してしまいます。
+通常、 |:terminal| の中で `git commit` などのコマンドを使用すると、ターミナル
+の中でさらにVimが起動してしまいます。
 その場合、設定などによっては思わぬ挙動を示すことがあります。
 
-このプラグイン vim-editerm は、 |:terminal| の中の環境変数 `$EDITOR` を
-自動で変更し、 `git commit` などのコマンドでVimを新たに起動するのではなく、
-外のVimにファイル編集を受け渡すようにすることができるプラグインです。
+このプラグイン *vim-editerm* は、 |:terminal| の中の環境変数 `$EDITOR` を自動
+で変更し、 `git commit` などのコマンドでVimを新たに起動するのではなく、外のVim
+にファイル編集を受け渡すようにすることができるプラグインです。
 
 ==============================================================================
 インストール                                             *vim-editerm-install*
@@ -55,7 +55,7 @@ Cq                                                                 *:Cq* *:CQ*
 シェル                                           *vim-editerm-shell-functions*
 
 `.zshrc` や `.bashrc` に初期化処理（ |vim-editerm-shell-init| ）を記述した
-場合、次のコマンドを使用できるようになります。 
+場合、次のコマンドを使用できるようになります。
 
 >
     :drop <files...>
@@ -108,9 +108,9 @@ g:editerm_defdrop_prefix                            *g:editerm_defdrop_prefix*
     デフォルト: `':'`
 
     `vim-editerm` はシェルに、外のVimにファイルを受け渡すための特殊なコマンド
-    （ |vim-editerm-shell-functions| ）を定義します。
+    （|vim-editerm-shell-functions|）を定義します。
 
-    これらのコマンドの接頭辞（ `:` ）を変更したい場合、
+    これらのコマンドの接頭辞（`:`）を変更したい場合、
     `g:editerm_defdrop_prefix` を変更します。
 
     例: >

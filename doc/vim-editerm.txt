@@ -1,4 +1,4 @@
-*vim-editerm* Plugin sets $EDITOR using parent vim in :terminal
+*vim-editerm.txt* Plugin sets $EDITOR using parent vim in :terminal
 
 ==============================================================================
 CONTENTS                                                *vim-editerm-contents*
@@ -17,11 +17,11 @@ CONTENTS                                                *vim-editerm-contents*
 ==============================================================================
 INTRODUCTION                                        *vim-editerm-introduction*
 
-Usually, calling `git commit`, `vim` and suchlike commands in |:terminal|,  
-new vim process starts in their.
+Usually, calling `git commit`, `vim` and suchlike commands in |:terminal|, new
+vim process starts in their.
 But it makes some unfavorable situation depending on the settings.
 
-This plugin, vim-editerm will set an environment varialble `$EDITOR` and
+This plugin, *vim-editerm* will set an environment varialble `$EDITOR` and
 override `vim` command with function that drops files in new buffer in parent
 vim.
 
@@ -86,7 +86,7 @@ g:editerm_defdrop                                          *g:editerm_defdrop*
     Default: `'1'`
 
     `vim-editerm` will create special commands which drop files to vim.
-    (See: |vim-editerm-shell-functions| )
+     (See:|vim-editerm-shell-functions|)
 
     To suppress them, you can set `g:editerm_defdrop` to `0`.
 
@@ -98,7 +98,7 @@ g:editerm_defdrop_prefix                            *g:editerm_defdrop_prefix*
     Default: `':'`
 
     `vim-editerm` will create special commands which drop files to vim.
-    (See: |vim-editerm-shell-functions| )
+     (See:|vim-editerm-shell-functions|)
 
     To change their prefix (`:`), you can set `g:editerm_defdrop_prefix`.
 
