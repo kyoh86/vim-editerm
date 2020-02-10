@@ -1,6 +1,6 @@
 # vim-editerm
 
-A plugin sets `$EDITOR` using vim in `:terminal`.
+A plugin sets `$EDITOR` in `:terminal` to open a file in the working vim instead of a new one.
 
 Usually, calling `git commit`, `vim` and suchlike commands in |:terminal|,  
 new vim process starts in their.
@@ -83,6 +83,11 @@ And if you want to change prefix of them:
 ```vim
 let g:editerm_defdrop_prefix = 'vim_'  " default: ':'
 ```
+
+## Similar projects
+
+- [lambdalisue/edita.vim](https://github.com/lambdalisue/edita.vim)
+  - **no external dependencies**
 
 # LICENSE
 
