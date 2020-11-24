@@ -4,6 +4,14 @@
 # Maintainer:	kyoh86
 # License:		MIT License(http://www.opensource.org/licenses/MIT)
 
+if [ $# -eq 0 ]; then
+  if [ "$VIM_EDITERM_OPENER" = 'n' ] || \
+     [ "$VIM_EDITERM_OPENER" = 'v' ] || \
+     [ "$VIM_EDITERM_OPENER" = 't' ] ; then
+    echo -e "\033]51;[\"call\", \"Tapi_EditermEditFile\", [\"${VIM_EDITERM_OPENER}\", \"\", \"\"]]\007"
+  fi
+fi
+
 for file; do
   if [ "${file:0:1}" != "/" ]; then
     file="${PWD%/}/${file}"
