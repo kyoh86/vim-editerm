@@ -38,7 +38,7 @@ function! editerm#release_remote(bufnum, ret)
   unlet s:remotes[a:bufnum]
 endfunction
 
-function! editerm#open(command, lockfile, filename)
+function! editerm#open(command, lockfile, filename, options)
   let l:command = get({
     \ 'n': 'new',
     \ 'e': 'edit',
@@ -50,7 +50,7 @@ function! editerm#open(command, lockfile, filename)
     return
   endif
 
-  execute(l:command .. ' ' .. a:filename)
+  execute(l:command .. ' ' .. a:options .. ' ' .. a:filename)
 
   if a:lockfile != ''
     let s:remotes[bufnr('%')] = a:lockfile
