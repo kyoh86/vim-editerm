@@ -13,7 +13,7 @@ for file; do
   fi
 
   if [[ "${file}" =~ ^\+[0-9]+$ ]]; then
-    opts="${opt:-} ${file}"
+    opts="${opts:-} ${file}"
     continue
   fi
 
