@@ -16,8 +16,8 @@ scriptversion 3
 " Description: It should be called from :terminal with three parameters
 " [(n|e|v|t), (lock file), (editing file)] as $EDITOR.
 function! Tapi_EditermEditFile(bufnum, arglist)
-  if len(a:arglist) == 3
-    call editerm#open(a:arglist[0], a:arglist[1], a:arglist[2])
+  if len(a:arglist) == 4
+    call editerm#open(a:arglist[0], a:arglist[1], a:arglist[2], a:arglist[3])
   endif
 endfunction
 
